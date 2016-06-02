@@ -1,102 +1,27 @@
-	% Formelsammlung fuer Dynamische Systeme, 2014/15
+% Formelsammlung fuer Dynamische Systeme, 2014/15
+% based on template from www.latex4ei.de
 % 2 Seiten
 
 % Dokumenteinstellungen
-% ======================================================================	
+% ======================================================================
+\documentclass[german]{latex4ei/latex4ei_sheet}
 
-% Dokumentklasse (Schriftgröße 6, DIN A4, Artikel)
-\documentclass[6pt,a4paper,fleqn]{scrartcl}
-
-% Pakete laden
-\usepackage[utf8]{inputenc}		% Zeichenkodierung: UTF-8 (für Umlaute)   
-\usepackage[german]{babel}		% Deutsche Sprache
-\usepackage{multicol}			% Spaltenpaket
-\usepackage{amsmath}
-\usepackage{amssymb}
-%\usepackage{esint}				% erweiterte Integralsymbole
-\usepackage{multicol}			% ermöglicht Seitenspalten  
-\usepackage{wasysym}			% Blitz
-\usepackage{graphicx}
-\usepackage{fancybox}
-\usepackage{enumitem}
 \setlist{nosep}
-%\usepackage{physics}
-      
-% Seitenlayout, Ränder und Zeilenabstand:
-\usepackage{geometry}
-\geometry{a4paper,landscape, left=6mm,right=6mm, top=0mm, bottom=3mm,includeheadfoot} 
-\linespread{1}
 
-%Kopf- und Fußzeile
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-
-   %\fancyfoot[C]{von ABCDE - SoSe EI 2014}
-   \renewcommand{\headrulewidth}{0.0pt} %obere Linie ausblenden
-   \renewcommand{\footrulewidth}{0.1pt} %obere Linie ausblenden
-
-   \fancyfoot[R]{Stand: \today \qquad \thepage}
-   \fancyfoot[L]{Evtl. Fehler bitte sofort melden!!!!einself!!}
-	
-% Schriftart SANS für bessere Lesbarkeit bei kleiner Schrift
-\renewcommand{\familydefault}{\sfdefault} 
-
-
-% Custom Commands
-%\renewcommand{\thesubsection}{\arabic{subsection}}
-%\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
-\newcommand{\me}[1]{\ensuremath{\left\{#1\right\}}}
-\newcommand{\dme}[2]{\ensuremath{\left\{#1\,\vert\,#2 \right\}}}
-\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
-\newcommand{\un}[1]{\; \unit{#1} }
-\newcommand{\unf}[2]{\;\left[ \unitfrac{#1}{#2} \right]}
-\newcommand{\norm}[2][\relax]{\ifx#1\relax \ensuremath{\left\Vert#2\right\Vert}\else \ensuremath{\left\Vert#2\right\Vert_{#1}}\fi}
-\newcommand{\enbrace}[1]{\ensuremath{\left(#1\right)}}
-\newcommand{\nira}[1]{\ensuremath{\overset{n \rightarrow \infty}{\longrightarrow}}}
 \newcommand{\os}[2]{\ensuremath{\overset{#1}{#2}}}
-\makeatletter
-\newcommand{\Ra}[0]{\ensuremath{\Rightarrow}}
-\newcommand{\ra}[0]{\ensuremath{\rightarrow}}
-\newcommand{\gk}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
-\newcommand{\sprod}[2]{\ensuremath{%
-  \setbox0=\hbox{\ensuremath{#2}}
-  \dimen@\ht0
-  \advance\dimen@ by \dp0
-  \left\langle #1\rule[-\dp0]{0pt}{\dimen@},#2\right\rangle}}
-\makeatletter
-\newcommand{\rmnum}[1]{\romannumeral #1}
-\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
 
-\makeatletter
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-  { -3.25ex \@plus -0.1ex \@minus -0.2ex}% -3.25ex \@plus -0.1ex \@minus -0.2ex
-  {0.01pt}%0.01pt %linebreak
-  {\raggedsection\normalfont\sectfont\nobreak\size@paragraph}% \raggedsection\normalfont\sectfont\nobreak\size@paragraph
-}
-\makeatother
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
-\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
-\setlength{\mathindent}{0pt}
-\setcounter{section}{-1}
-\date{}
+\title{Dynamische Systeme}
+
 % Dokumentbeginn
 % ======================================================================
 \begin{document}
-%\section{}
-% ----------------------------------------------------------------------
 
-% Aufteilung in Spalten
-\setlength{\columnseprule}{1pt}\begin{multicols*}{4}
-\setlength\parindent{0pt}      
+\IfFileExists{git.id}{\input{git.id}}{}
+\ifdefined\GitRevision\mydate{\GitNiceDate\ (git \GitRevision)}\fi
 
-\title{Dynamische Systeme}
 \maketitle
 
-
 \section{Grundlagen}
-
 Zustands-DGL: $\underline{\dot{x}} =  \underline{f}\left( \underline{x}, \underline{u}, t \right) $ \\
 Ausgangsgleichung: $\underline{y} = \underline{h} \left( \underline{x}, \underline{u}, t \right)$ \\
 $\underline{x} \in \mathbb{R}^n$, $\underline{u} \in \mathbb{R}^m$, $\underline{y} \in \mathbb{R}^q$, $t \in \mathbb{R}$\\
@@ -105,8 +30,8 @@ Steuerungsaffin: $\underline{\dot{x}} = \underline{f}(\underline{x}) + \sum_{i=1
 
 \begin{align*}
 \text{Jacobi-Matrix:} \,
-\left[ \frac{\partial f_i}{\partial x_j} \right] = 
-\begin{bmatrix} 
+\left[ \frac{\partial f_i}{\partial x_j} \right] =
+\begin{bmatrix}
   \frac{\partial f_1}{\partial x_1} &   \cdots  &   \frac{\partial f_1}{\partial x_n} \\
   \vdots                            &           &   \vdots \\
   \frac{\partial f_n}{\partial x_1} &   \cdots  &   \frac{\partial f_n}{\partial x_n}
@@ -118,9 +43,9 @@ Steuerungsaffin: $\underline{\dot{x}} = \underline{f}(\underline{x}) + \sum_{i=1
 Referenzlösung: $\underline{x}^*(t), \underline{y}^*(t), \underline{u}^*(t), t > 0$ \\
 
 Linearisierung: \\
-$\underline{\dot{x}}^* + \Delta\underline{\dot{x}} = \underline{f}\left( \underline{x}^*, \underline{u}^* \right) + 
+$\underline{\dot{x}}^* + \Delta\underline{\dot{x}} = \underline{f}\left( \underline{x}^*, \underline{u}^* \right) +
 \left[ \frac{\partial f_i}{\partial x_j} \right]_{(x^*, u^*)} \Delta\underline{x} +
-\left[ \frac{\partial f_i}{\partial u_j} \right]_{(x^*, u^*)} \Delta\underline{u} 
+\left[ \frac{\partial f_i}{\partial u_j} \right]_{(x^*, u^*)} \Delta\underline{u}
 $
 
 Kleinsignalmodell:
@@ -229,7 +154,7 @@ $\dot x = f(x,t) \overset{!}{=} 0$
 
 \subsection{Periodisches Verhalten}
 
-Lösungstrajektorie: $\underline{\Phi}$ 
+Lösungstrajektorie: $\underline{\Phi}$
 
 Grenzzyklus: $\underline{x}_G(t)$
 
@@ -430,7 +355,7 @@ Wenn nur $x(t)=0$ in $\mathcal{S}$ bleiben kann, dann ist $x^* = 0$ asymptotisch
 \subsubsection*{Korollar: Krasovski (globale Variante von Barbashin)}
 \begin{itemize}
   \item $x^*$ ist Ruhelage
-  \item $V(x)$ ist stetig diff'bar, pdf und radial unbeschränkt auf $\mathbb{R}^n$ 
+  \item $V(x)$ ist stetig diff'bar, pdf und radial unbeschränkt auf $\mathbb{R}^n$
   \item $\dot{V}(x) \leq 0$ auf $\mathbb{R}^n$
   \item $\mathcal{S} := {x \in \mathbb{R}^n | \dot{V}(x) = 0 }$
 \end{itemize}
@@ -702,7 +627,7 @@ $ L_g L_f^i \varphi_1(x) =
 \end{cases}$
 
 ist gleichbedeutend mit: \\
-$\left[ \frac{\partial \varphi_1(x)}{\partial x} \right] \text{ad}_f^i g(x) = 
+$\left[ \frac{\partial \varphi_1(x)}{\partial x} \right] \text{ad}_f^i g(x) =
 \begin{cases}
   0, & i = 0, \dots, n-2 \\
   \hat{g}(x), & i = n-1
@@ -840,7 +765,7 @@ Gezielte Unterdrückung von Störung ist möglich wenn:
 \end{enumerate}
 
 \subsubsection*{zu 1.}
-Um in den Sliding Mode zu kommen muss gelten: 
+Um in den Sliding Mode zu kommen muss gelten:
 \begin{itemize}
   \item $s_i \dot{s}_i < 0$
   \item $\lim\limits_{s_i(x) \rightarrow 0^+} \dot{s}_i(x) = k^- < 0$ und $\lim\limits_{s_i(x) \rightarrow 0^-} \dot{s}_i(x) = k^+ > 0$
@@ -853,7 +778,7 @@ $\dot{x} = f(x)$\\
 Ansatz: $\dot{x}_\text{fi} = \alpha f^+(x) + (1-\alpha) f^-(x)$ mit $0 \leq \alpha \leq 1$ \\
 Bedingung: $\dot{s}(x_\text{fi}) = \frac{\partial s}{\partial x} \dot{x}_\text{fi} = 0$ \\
 Man erhält: $\alpha = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x))  }$ \\
-und somit:\\ $\dot{x}_\text{fi} = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^+(x) - 
+und somit:\\ $\dot{x}_\text{fi} = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^+(x) -
 \frac{ \frac{\partial s}{\partial x} f^+(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^-(x)$ \\
 Wobei: $\frac{\partial s}{\partial x}f^- \geq 0$ und $\frac{\partial s}{\partial x}f^+ \leq 0$ \\
 
@@ -864,45 +789,8 @@ Daraus folgt: $\dot{s}(x) = L_f s(x) + L_g s(x) \tilde{u}_\text{eq}$ \\
 Kontinuierliche Ersatzstellgröße: $\tilde{u}_\text{eq} = -L_g s(x) ^{-1} L_f s(x)$ \\
 Systemdynamik: $\dot{x} = f(x) - g(x) L_g s(x)^{-1} L_f s(x)$
 
-
-
-
-
-
-
-
-
-
-
 \subsection{Blockschaltbild}
 %\includegraphics[angle=90]{./img/block.pdf}
 \includegraphics[angle=90, width=5cm]{./img/block.pdf}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% Ende des Inhalts
-\end{multicols*}
-% Ende der Spalten
-
-
-% Dokumentende
-% ======================================================================
 \end{document}
