@@ -1,126 +1,54 @@
-	% Formelsammlung fuer Dynamische Systeme, 2014/15
+% Formelsammlung fuer Dynamische Systeme, 2014/15
+% based on template from www.latex4ei.de
 % 2 Seiten
 
 % Dokumenteinstellungen
-% ======================================================================	
+% ======================================================================
+\documentclass[german]{latex4ei/latex4ei_sheet}
 
-% Dokumentklasse (Schriftgröße 6, DIN A4, Artikel)
-\documentclass[6pt,a4paper,fleqn]{scrartcl}
-
-% Pakete laden
-\usepackage[utf8]{inputenc}		% Zeichenkodierung: UTF-8 (für Umlaute)   
-\usepackage[german]{babel}		% Deutsche Sprache
-\usepackage{multicol}			% Spaltenpaket
-\usepackage{amsmath}
-\usepackage{amssymb}
-%\usepackage{esint}				% erweiterte Integralsymbole
-\usepackage{multicol}			% ermöglicht Seitenspalten  
-\usepackage{wasysym}			% Blitz
-\usepackage{graphicx}
-\usepackage{fancybox}
-\usepackage{enumitem}
 \setlist{nosep}
-%\usepackage{physics}
-      
-% Seitenlayout, Ränder und Zeilenabstand:
-\usepackage{geometry}
-\geometry{a4paper,landscape, left=6mm,right=6mm, top=0mm, bottom=3mm,includeheadfoot} 
-\linespread{1}
 
-%Kopf- und Fußzeile
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-
-   %\fancyfoot[C]{von ABCDE - SoSe EI 2014}
-   \renewcommand{\headrulewidth}{0.0pt} %obere Linie ausblenden
-   \renewcommand{\footrulewidth}{0.1pt} %obere Linie ausblenden
-
-   \fancyfoot[R]{Stand: \today \qquad \thepage}
-   \fancyfoot[L]{Evtl. Fehler bitte sofort melden!!!!einself!!}
-	
-% Schriftart SANS für bessere Lesbarkeit bei kleiner Schrift
-\renewcommand{\familydefault}{\sfdefault} 
-
-
-% Custom Commands
-%\renewcommand{\thesubsection}{\arabic{subsection}}
-%\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
-\newcommand{\me}[1]{\ensuremath{\left\{#1\right\}}}
-\newcommand{\dme}[2]{\ensuremath{\left\{#1\,\vert\,#2 \right\}}}
-\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
-\newcommand{\un}[1]{\; \unit{#1} }
-\newcommand{\unf}[2]{\;\left[ \unitfrac{#1}{#2} \right]}
-\newcommand{\norm}[2][\relax]{\ifx#1\relax \ensuremath{\left\Vert#2\right\Vert}\else \ensuremath{\left\Vert#2\right\Vert_{#1}}\fi}
-\newcommand{\enbrace}[1]{\ensuremath{\left(#1\right)}}
-\newcommand{\nira}[1]{\ensuremath{\overset{n \rightarrow \infty}{\longrightarrow}}}
 \newcommand{\os}[2]{\ensuremath{\overset{#1}{#2}}}
-\makeatletter
-\newcommand{\Ra}[0]{\ensuremath{\Rightarrow}}
-\newcommand{\ra}[0]{\ensuremath{\rightarrow}}
-\newcommand{\gk}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
-\newcommand{\sprod}[2]{\ensuremath{%
-  \setbox0=\hbox{\ensuremath{#2}}
-  \dimen@\ht0
-  \advance\dimen@ by \dp0
-  \left\langle #1\rule[-\dp0]{0pt}{\dimen@},#2\right\rangle}}
-\makeatletter
-\newcommand{\rmnum}[1]{\romannumeral #1}
-\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
 
-\makeatletter
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-  { -3.25ex \@plus -0.1ex \@minus -0.2ex}% -3.25ex \@plus -0.1ex \@minus -0.2ex
-  {0.01pt}%0.01pt %linebreak
-  {\raggedsection\normalfont\sectfont\nobreak\size@paragraph}% \raggedsection\normalfont\sectfont\nobreak\size@paragraph
-}
-\makeatother
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
-\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
-\setlength{\mathindent}{0pt}
-\setcounter{section}{-1}
-\date{}
+\title{Dynamische Systeme}
+
 % Dokumentbeginn
 % ======================================================================
 \begin{document}
-%\section{}
-% ----------------------------------------------------------------------
 
-% Aufteilung in Spalten
-\setlength{\columnseprule}{1pt}\begin{multicols*}{4}
-\setlength\parindent{0pt}      
+\IfFileExists{git.id}{\input{git.id}}{}
+\ifdefined\GitRevision\mydate{\GitNiceDate\ (git \GitRevision)}\fi
 
-\title{Dynamische Systeme}
 \maketitle
 
-
 \section{Grundlagen}
-
+\begin{sectionbox}
 Zustands-DGL: $\underline{\dot{x}} =  \underline{f}\left( \underline{x}, \underline{u}, t \right) $ \\
 Ausgangsgleichung: $\underline{y} = \underline{h} \left( \underline{x}, \underline{u}, t \right)$ \\
 $\underline{x} \in \mathbb{R}^n$, $\underline{u} \in \mathbb{R}^m$, $\underline{y} \in \mathbb{R}^q$, $t \in \mathbb{R}$\\
 
 Steuerungsaffin: $\underline{\dot{x}} = \underline{f}(\underline{x}) + \sum_{i=1}^{m} \underline{g_i}(\underline{x}) u_i$
 
-\begin{align*}
+\begin{equation*}
 \text{Jacobi-Matrix:} \,
-\left[ \frac{\partial f_i}{\partial x_j} \right] = 
-\begin{bmatrix} 
+\left[ \frac{\partial f_i}{\partial x_j} \right] =
+\begin{bmatrix}
   \frac{\partial f_1}{\partial x_1} &   \cdots  &   \frac{\partial f_1}{\partial x_n} \\
   \vdots                            &           &   \vdots \\
   \frac{\partial f_n}{\partial x_1} &   \cdots  &   \frac{\partial f_n}{\partial x_n}
 \end{bmatrix}
-\end{align*}
+\end{equation*}
+\end{sectionbox}
 
+\begin{sectionbox}
 \subsection{Linearisierung um eine Referenzlösung}
 
 Referenzlösung: $\underline{x}^*(t), \underline{y}^*(t), \underline{u}^*(t), t > 0$ \\
 
 Linearisierung: \\
-$\underline{\dot{x}}^* + \Delta\underline{\dot{x}} = \underline{f}\left( \underline{x}^*, \underline{u}^* \right) + 
+$\underline{\dot{x}}^* + \Delta\underline{\dot{x}} = \underline{f}\left( \underline{x}^*, \underline{u}^* \right) +
 \left[ \frac{\partial f_i}{\partial x_j} \right]_{(x^*, u^*)} \Delta\underline{x} +
-\left[ \frac{\partial f_i}{\partial u_j} \right]_{(x^*, u^*)} \Delta\underline{u} 
+\left[ \frac{\partial f_i}{\partial u_j} \right]_{(x^*, u^*)} \Delta\underline{u}
 $
 
 Kleinsignalmodell:
@@ -136,8 +64,9 @@ Kleinsignalmodell:
   \Delta \underline{\dot{x}}    &=  A(t) \Delta\underline{x} + B(t) \Delta\underline{u} \\
   \Delta \underline{y}          &=  C(t) \Delta\underline{x} + D(t) \Delta\underline{u}
 \end{align*}
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Linearisierung um eine Ruhelage}
 
 Ruhelage: $\underline{\dot{x}}^* = \underline{f}\left( \underline{x}^*, \underline{u}^*, t \right) = \underline{0}$
@@ -147,7 +76,6 @@ Ruhelage: $\underline{\dot{x}}^* = \underline{f}\left( \underline{x}^*, \underli
   \Delta \underline{\dot{x}}    &=  A \Delta\underline{x} + B \Delta\underline{u} \\
   \Delta \underline{y}          &=  C \Delta\underline{x} + D \Delta\underline{u}
 \end{align*}
-
 
 \subsection{Lokale Existenz und Eindeutigkeit einer Lösung von $f(x,x_0,t)$}
 
@@ -168,32 +96,35 @@ Eigenschaft gilt:
   \item global, wenn sie für alle $x \in \mathbb{R}^n$ gilt
   \item uniform, wenn sie für alle $t_0 \geq 0$ gilt
 \end{itemize}
+\end{sectionbox}
 
+\begin{sectionbox}
 \subsection{Definitheit von Funktionen}
 
-\subsubsection*{Positiv definite Funktionen (pdf)}
+\subsubsection{Positiv definite Funktionen (pdf)}
 \begin{tabular}{cccc}
   $V(x) > 0$ & für & $x \neq 0$ & und \\
   $V(x) = 0$ & für & $x = 0$ &
 \end{tabular}
 
-\subsubsection*{Positiv semidefinite Funktionen (psdf)}
+\subsubsection{Positiv semidefinite Funktionen (psdf)}
 \begin{tabular}{cccc}
   $V(x) \leq 0$ & für & $x \neq 0$ & und \\
   $V(x) = 0$ & für & $x = 0$ &
 \end{tabular}
 
-\subsubsection*{Negativ (semi)definite Funktionen}
+\subsubsection{Negativ (semi)definite Funktionen}
 \begin{tabular}{cccc}
   negativ definit: & $-V(x)$ ist pd \\
   negativ semidefinit: & $-V(x)$ ist psd
 \end{tabular}
 
-
-\subsubsection*{Lipschitz-Stetigkeit}
+\subsubsection{Lipschitz-Stetigkeit}
 $\exists L \geq 0 : \| f(x,t) - f(y,t) \| \leq L \cdot \|x-y\| $
+\end{sectionbox}
 
-\subsubsection*{Stabilität im Sinne von Lyapunov (iSvL)}
+\begin{sectionbox}
+\subsubsection{Stabilität im Sinne von Lyapunov (iSvL)}
 Ruhelage $x^* = 0$ ist:
 \begin{itemize}
   \item stabil: $\|x(t_0)\| < \delta \Rightarrow \|x(t)\| < \varepsilon$
@@ -203,13 +134,13 @@ Ruhelage $x^* = 0$ ist:
   \item instabil: $x^*$ ist nicht stabil
 \end{itemize}
 
-\subsubsection*{Lie-Ableitung von $V(x)$}
+\subsubsection{Lie-Ableitung von $V(x)$}
 $\dot{V}(\underline{x}) = \sum\limits_{i=1}^{n} \frac{\partial V}{\partial x_i}f_i(x) = \frac{\partial V}{\partial \underline{x}} \underline{f}(\underline{x}) $
 
-\subsubsection*{Lie-Ableitung}
+\subsubsection{Lie-Ableitung}
 $L_f h := \nabla h \cdot f$
 
-\subsubsection*{Mehrfache Anwendung der Lie-Ableitung}
+\subsubsection{Mehrfache Anwendung der Lie-Ableitung}
 $L_f^0 h = h$ \\
 $L_f^i h = L_f L_f^{i-1} h$
 
@@ -222,14 +153,13 @@ $\text{ad}_f^i g = \left[ f, \text{ad}_f^{i-1} g \right]$
 
 \subsubsection*{Ruhelage bestimmen}
 $\dot x = f(x,t) \overset{!}{=} 0$
+\end{sectionbox}
 
-
-% anwendbarer Inhalt des Skripts
 \section{Harmonische Balance}
-
+\begin{sectionbox}
 \subsection{Periodisches Verhalten}
 
-Lösungstrajektorie: $\underline{\Phi}$ 
+Lösungstrajektorie: $\underline{\Phi}$
 
 Grenzzyklus: $\underline{x}_G(t)$
 
@@ -254,25 +184,29 @@ $\Rightarrow$ Trajektorie $x(t)$ geht auf Grenzzyklus $x_G(t)$ zu, $\forall x \i
 
 \subsection{Asymptotisch semistabil}
 $\Rightarrow$ Trajektorie $x(t)$ geht nur für bestimmte Menge an Punkten $\in \mathbb{R}^n$ auf $x_G(t)$ zu.
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Existenz von Grenzzyklen in planaren Systemen}
-
+\begin{emphbox}
 \begin{align*}
   \text{im $\mathbb{R}^2$:} \,
   \dot{x}_1 =&  f_1(x_1, x_2) \\
   \dot{x}_2 =&  f_2(x_1, x_2)
 \end{align*}
+\end{emphbox}
 
-\subsubsection*{Benedixson-Kriterium}
+\subsubsection{Benedixson-Kriterium}
 Hat div$\left\{ \underline{f}(x_1, x_2) \right\}$ keine Vorzeichenänderung in $\mathcal{M}$, dann gibt es keinen Grenzzyklus in $\mathcal{M}$ \\
 mit $\text{div}\left\{ \underline{f}(x_1, x_2) \right\} = \left[ \frac{\partial f_1}{\partial x_1} + \frac{\partial f_2}{ \partial x_2} \right]$
 
-\subsubsection*{$\omega$-Limit-Set}
+\subsubsection{$\omega$-Limit-Set}
 
 $\lim\limits_{n \rightarrow \infty} \underline{\Phi} (t_n, t_0, x_0) = \underline{z}$ \\
 Menge aller Punkte $z$ heißt $\omega$-Limit-Set
+\end{sectionbox}
 
+\begin{sectionbox}
 \subsection{Methode der Harmonischen Balance}
 
 System besteht aus Kennlinie $f(e, \text{sgn}(\dot{e}))$ und Teilsystem $G(j\omega)$. \\
@@ -287,48 +221,47 @@ Voraussetzungen:
   \item $e(t)$ bzw $y(t)$ sind näherungsweise harmonisch \\ (d.h. $e(t) = A \sin(\omega t) = \text{Re} \left\{ -j A e^{j\omega t} \right\}$)
 \end{itemize}
 
-\subsubsection*{Gleichung der Harmonischen Balance bzw Schwingbedingung}
-\fbox{$N(A) \cdot G(j\omega) = -1$} \\
+\subsubsection{Gleichung der Harmonischen Balance bzw Schwingbedingung}
+\begin{emphbox}
+  $N(A) \cdot G(j\omega) = -1$
+\end{emphbox}
 mit Beschreibungsfunktion $N(A) = \frac{a_1 + j b_1}{A}$ \\
 inverse Beschreibungsfunktion $N_I(A) = - \frac{1}{N(A)}$ \\
 
-\subsubsection*{Vorgehen zum Koeffizienten-Bestimmen}
-
-\begin{enumerate}
+\begin{cookbox}{Vorgehen zum Koeffizienten-Bestimmen}
   \item $a_1, b_1$:  $u(t)$ fourier-transformieren zu $\bar{u}(t)$ \\
     $\Rightarrow a_1 = \frac{2}{T_0} \int\limits_{T_0} u(t) \sin(\omega t) \diff t; \\
                  b_1 = \frac{2}{T_0} \int\limits_{T_0} u(t) \cos(\omega t) \diff t$
   \item $A$: $e(t) = A \sin(\omega t)$, bzw wird berechnet als $A_g$ mit $\omega_g$
-\end{enumerate}
+\end{cookbox}
 
-\subsubsection*{Bestimmen von $A_g, \omega_g$}
-\begin{itemize}
-  \item algebraisch: \\
-    Aus Gleichung der Harmonischen Balance folgt: $N(A)G(j\omega) = -1$ \\
-    bzw $G(j \omega) = N_I(A) \Rightarrow$ \\
-    \begin{enumerate}
-      \item $\text{Re}\left\{ G(j \omega) \right\} = \text{Re} \left\{ N_I(A) \right\}$ \\
-      \item $\text{Im}\left\{ G(j \omega) \right\} = \text{Im} \left\{ N_I(A) \right\}$
-    \end{enumerate}
-  \item graphisch: \\
-    $G(j \omega)$ und $N_I(A)$ in komplexer Ebene aufzeichnen\\
-    bei Schnittpunkten gilt: $G(j \omega) = N_I(A)$ \\
-    Schnittpunkte sind mögliche Grenzschwingungen \\
-    $\Rightarrow$ algebraisch $A_g$ und $\omega_g$ bestimmen
-\end{itemize}
+\subsubsection{Bestimmen von $A_g, \omega_g$}
+\begin{cookbox}{algebraisch}
+  \item Aus Gleichung der Harmonischen Balance folgt: $N(A)G(j\omega) = -1$ bzw. $G(j \omega) = N_I(A)$
+  \item $\text{Re}\left\{ G(j \omega) \right\} = \text{Re} \left\{ N_I(A) \right\}$
+  \item $\text{Im}\left\{ G(j \omega) \right\} = \text{Im} \left\{ N_I(A) \right\}$
+\end{cookbox}
 
-\subsubsection*{Stabilität von Grenzschwingungen, graphisch bestimmen}
+\begin{cookbox}{geometrisch}
+  \item $G(j \omega)$ und $N_I(A)$ in komplexer Ebene aufzeichnen
+  \item bei Schnittpunkten gilt: $G(j \omega) = N_I(A)$
+  \item Schnittpunkte sind mögliche Grenzschwingungen
+  \item $\Rightarrow$ algebraisch $A_g$ und $\omega_g$ bestimmen
+\end{cookbox}
 
+\subsubsection{Stabilität von Grenzschwingungen, graphisch bestimmen}
 Nyquistkriterium bzgl kritischen Punktes $N_I(A_g)$ anwenden
+\end{sectionbox}
 
 \section{Stabilität nichtlinearer Systeme}
+\begin{sectionbox}
 
 \subsection{Direkte Methode von Lyapunov}
 Damit kann Stabilität, aber keine Instabilität nachgewiesen werden
 
-\subsubsection*{Zeitinvariante Systeme}
+\subsubsection{Zeitinvariante Systeme}
 
-\subsubsection*{Direkte Methode von Lyapunov für lokale Stabilität}
+\subsubsection{Direkte Methode von Lyapunov für lokale Stabilität}
 
 $x^*$ ist \underline{lokal} (asymptotisch) stabil iSvL wenn:
 \begin{itemize}
@@ -341,7 +274,7 @@ $x^*$ ist \underline{lokal} (asymptotisch) stabil iSvL wenn:
    &$\dot{V}(x) < 0 \Rightarrow $& lokal asymptotisch stabil
 \end{tabular}
 
-\subsubsection*{Direkte Methode von Lyapunov für globale Stabilität}
+\subsubsection{Direkte Methode von Lyapunov für globale Stabilität}
 
 $x^*$ ist \underline{global} (asymptotisch) stabil iSvL wenn:
 \begin{itemize}
@@ -355,15 +288,14 @@ $x^*$ ist \underline{global} (asymptotisch) stabil iSvL wenn:
    &$\dot{V}(x) < 0 \Rightarrow $& global asymptotisch stabil
 \end{tabular}
 
-
-\subsubsection*{Zeitvariante Systeme}
+\subsubsection{Zeitvariante Systeme}
 Notwendige Bedingungen damit $x^*$ lokal uniform (asymptotisch) stabil ist:
 \begin{itemize}
   \item $x^*$ ist Ruhelage
   \item $V(x)$ ist stetig diff'bar
 \end{itemize}
 
-\subsubsection*{Lokale Stabilität}
+\subsubsection{Lokale Stabilität}
 $x^*$ ist lokal uniform stabil iSvL wenn:
 \begin{itemize}
   \item $W_1(x), W_2(x)$ stetig pdf
@@ -377,13 +309,14 @@ $x^*$ ist lokal uniform asymptotisch stabil wenn zusätzlich gilt:
   \item $\dot{V}(x,t) = \frac{\partial V}{\partial t} + \frac{\partial V}{\partial \underline{x}} \underline{f}(x,t) \leq -W_3(x)$
 \end{itemize}
 
-\subsubsection*{Globale Stabilität}
+\subsubsection{Globale Stabilität}
 Uniforme Stabilität ist global wenn zusätzlich gilt: \\
 $V(x,t)$ ist radial unbeschränkt
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Häufig verwendete Lyapunov-Funktionen und deren Eigenschaften}
-$V(x,t = \dots$
+$V(x,t) = \dots$
 \begin{itemize}
   \item $\|x\|^2$: pdf, abnehmend, radial unbeschränkt
   \item $x^T P x, P \in \mathbb{R}^{n \times n}$,pdf: pdf, abnehmend, radial unbeschränkt
@@ -391,7 +324,6 @@ $V(x,t = \dots$
   \item $e^{-t}\|x\|^2$: pdf, abnehmend
   \item $\sin^2(\|x\|^2)$: lokal pdf, abnehmend
 \end{itemize}
-
 
 \subsection{Exponentielle Stabilität}
 $x^* = 0$ ist exponentiell stabile Ruhelage wenn folgende äquivalente Aussagen gelten:
@@ -402,11 +334,13 @@ $x^* = 0$ ist exponentiell stabile Ruhelage wenn folgende äquivalente Aussagen 
     $\dot{V}(x,t) \leq - \alpha_3 \|x\|^2$ \\
     $\|\frac{\partial V(\underline{x},t)}{\partial \underline{x}}\| \leq \alpha_4 \|x\| $
 \end{itemize}
+\end{sectionbox}
 
+\begin{sectionbox}
 \subsection{Invarianzprinzip von LaSalle}
 Invarianzmenge $\mathcal{M}: x(t_0) \in \mathcal{M} \Rightarrow  x(t) \in \mathcal{M}, \forall t \geq t_0$
 
-\subsubsection*{Invarianzprinzip}
+\subsubsection{Invarianzprinzip}
 \begin{itemize}
   \item $\Omega$ ist kompakte(dh abgeschlossen und beschränkt) Invarianzmenge
   \item $V(x)$ stetig diff'bar und $\dot{V}(x) \leq 0$ auf $\Omega$
@@ -418,7 +352,7 @@ daraus folgt: \\
 Besteht $\mathcal{M}$ nur aus $\underline{0}$ und ist $\dot{V}(x) \leq 0$, dann \\
 $\Rightarrow$ Ruhelage $\underline{0}$ ist asymptotisch stabil
 
-\subsubsection*{Korollar: Barbashin}
+\subsubsection{Korollar: Barbashin}
 \begin{itemize}
   \item $x^*$ ist Ruhelage
   \item $V(x)$ ist stetig diff'bar und pdf auf $\mathcal{B}_\varepsilon$
@@ -427,19 +361,19 @@ $\Rightarrow$ Ruhelage $\underline{0}$ ist asymptotisch stabil
 \end{itemize}
 Wenn nur $x(t)=0$ in $\mathcal{S}$ bleiben kann, dann ist $x^* = 0$ asymptotisch stabil
 
-\subsubsection*{Korollar: Krasovski (globale Variante von Barbashin)}
+\subsubsection{Korollar: Krasovski (globale Variante von Barbashin)}
 \begin{itemize}
   \item $x^*$ ist Ruhelage
-  \item $V(x)$ ist stetig diff'bar, pdf und radial unbeschränkt auf $\mathbb{R}^n$ 
+  \item $V(x)$ ist stetig diff'bar, pdf und radial unbeschränkt auf $\mathbb{R}^n$
   \item $\dot{V}(x) \leq 0$ auf $\mathbb{R}^n$
   \item $\mathcal{S} := {x \in \mathbb{R}^n | \dot{V}(x) = 0 }$
 \end{itemize}
 Wenn nur $x(t)=0$ in $\mathcal{S}$ bleiben kann, dann ist $x^* = 0$ global asymptotisch stabil
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Indirekte Methode von Lyapunov}
-
-\subsubsection*{Zeitinvariante Systeme}
+\subsubsection{Zeitinvariante Systeme}
 Linearisierung um Ruhelage $x^*$:\\
 Systemmatrix $A = \left[ \frac{\partial \underline{f}(\underline{x})}{\partial \underline{x}} \right]_{x=x^*}$
 \begin{itemize}
@@ -448,7 +382,7 @@ Systemmatrix $A = \left[ \frac{\partial \underline{f}(\underline{x})}{\partial \
   \item $A$ ist negativ semidefinit $\Rightarrow$ keine Aussage über $x^*$ möglich
 \end{itemize}
 
-\subsubsection*{Zeitvariante Systeme}
+\subsubsection{Zeitvariante Systeme}
 Linearisierung um Ruhelage $x^*$ \\
 $\Rightarrow \dot{x} = A(t) x + f_1(x,t)$, wobei \\
 \begin{itemize}
@@ -469,17 +403,17 @@ Stabilität des nichtlinearen Systems
     $\Rightarrow x^*$ instabil im NL System
 \end{itemize}
 
-\subsubsection*{Stabilität von LTV Systemen(1)}
-Ruhelage des LTV Systems ist exponentiell stabil wenn $\left[ A(t) + A(t)^T \right]$ negativ definit ist für alle $t$
-
-\subsubsection*{Stabilität von LTV Systemen(1)}
-Ruhelage des LTV Systems ist exponentiell stabil wenn $A(t)$ negativ definit ist und $A(t)$ beschränkt ist, dh \\
-$\int\limits_{0}^{\infty}A(t)^T A(t) \diff t < \infty$
+\subsubsection{Stabilität von LTV Systemen(1)}
+Ruhelage des LTV Systems ist exponentiell stabil wenn
+\begin{itemize}
+  \item $\left[ A(t) + A(t)^T \right]$ negativ definit ist für alle $t$
+  \item $A(t)$ negativ definit ist und $A(t)$ beschränkt ist, dh $\int\limits_{0}^{\infty}A(t)^T A(t) \diff t < \infty$
+\end{itemize}
 
 \subsection{Instabilität}
 Falls Stabilität nicht nachgewiesen werden kann, versucht man Instabilität nachzuweisen
 
-\subsubsection*{Satz von Chetaev}
+\subsubsection{Satz von Chetaev}
 \begin{itemize}
   \item $x^* = 0$ ist Ruhelage
   \item $V(x)$ ist stetig diff'bar, $V(0)=0, V(x_0)>0$ für $\|x_0\| > 0$
@@ -487,22 +421,23 @@ Falls Stabilität nicht nachgewiesen werden kann, versucht man Instabilität nac
 \end{itemize}
 Wenn $\dot{V}(x) > 0$ auf $\mathcal{U}$, dann ist $x^*=0$ instabil
 
-Bemerkung:\\
+Bemerkung:
 \begin{itemize}
   \item $V(x)$ muss keine pdf sein
   \item Es genügt Menge $\mathcal{U}$ zu finden, so dass: $V(x) > 0$ und $0 \in \mathcal{U}$
 \end{itemize}
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Einzugsgebiet}
 Falls asymptotisch stabile Ruhelage nicht global asymptotisch stabil \\
 $\Rightarrow$ Einzugsgebiet bestimmen, in der die Ruhelage lokal asymptotisch stabil ist
 
-\subsubsection*{Einzugsgebiet, Domain of Attraction, Basin}
+\subsubsection{Einzugsgebiet, Domain of Attraction, Basin}
 $\mathcal{A}(x^*) := \left\{ x_0 | \lim\limits_{t \rightarrow \infty} \Phi(t,t_0,x_0) = x^* \right\}$ \\
 mit $\Phi(t,t_0,x_0)$ als Lösung der DGL
 
-\subsubsection*{Bestimmen des Einzugsgebiets}
+\subsubsection{Bestimmen des Einzugsgebiets}
 \begin{itemize}
   \item $x^*$ ist Ruhelage, asymptotisch stabil
   \item $\mathcal{V} = {x^*} \cup \left\{ x | V(x) > 0, \dot{V}(x) < 0 \right\}$
@@ -510,35 +445,38 @@ mit $\Phi(t,t_0,x_0)$ als Lösung der DGL
 \end{itemize}
 Wenn $\mathcal{E}_c \subseteq \mathcal{V}$ und $\mathcal{E}_c$ ist beschränkt, dann ist $\mathcal{E}_c$ Teilmenge des Einzuggebiets
 
-
 \subsection{Lyapunov-basierter Reglerentwurf}
-\begin{enumerate}
+\begin{cookbox}{Vorgehen}
   \item $V(x)$ so aufstellen, dass $u$ in $V(x)$ und in $\dot{V}(x)$ vorkommt
   \item $u$ so einstellen, dass $V(x) > 0$ und $\dot{V}(x) < 0$
-\end{enumerate}
-
+\end{cookbox}
+\end{sectionbox}
 
 \section{Passivität}
+\begin{sectionbox}
 Achtung: $V(x)$ ist abstrakte Speicherfunktion \\
-Energiespeicherfunktion zB aus physikalischer Energiebetrachtung\\
+Energiespeicherfunktion zB. aus physikalischer Energiebetrachtung\\
 
-Verallgemeinerte Energiebilanz und Versorgungsrate eines Systems:\\
-$\int\limits_{0}^{t} s(u,y) \diff \tau + V(x(0)) = \int\limits_{0}^{t} g(\tau) \diff \tau + V(x(t))$  \\
-Mit: \\
-Netto-Energiezufluss: $\int\limits_{0}^{t} s(u,y) \diff \tau$ \\
-Versorgungsrate: $s(u,y)$ \\
-Anfangs gespeicherte Energie: $V(x(0))$ \\
-dissipierte Energie: $\int\limits_{0}^{t} g(\tau) \diff \tau$ \\
-dissipierte Leistung: $g(\tau)$ \\
-gespeicherte Energie: $V(x(t))$ \\
+Verallgemeinerte Energiebilanz und Versorgungsrate eines Systems:
+\begin{emphbox}
+$\int\limits_{0}^{t} s(u,y) \diff \tau + V(x(0)) = \int\limits_{0}^{t} g(\tau) \diff \tau + V(x(t))$
+\end{emphbox}
+\begin{tablebox}{ll}
+Netto-Energiezufluss & $\int\limits_{0}^{t} s(u,y) \diff \tau$ \\
+Versorgungsrate & $s(u,y)$ \\
+Anfangs gespeicherte Energie & $V(x(0))$ \\
+dissipierte Energie & $\int\limits_{0}^{t} g(\tau) \diff \tau$ \\
+dissipierte Leistung & $g(\tau)$ \\
+gespeicherte Energie & $V(x(t))$ \\
+\end{tablebox}
 Es gilt $\int\limits_{0}^{t}|s(u(\tau), y(\tau))| \diff \tau < \infty$
 
-\subsubsection*{Dissipativität (dissipativ bzgl $s(u,y)$)}
+\subsubsection{Dissipativität (dissipativ bzgl $s(u,y)$)}
 $V(x)$ ist psdf \\
 Integrale Dissipativitätsungleichung: $\int\limits_{0}^{t} s(u,y) \diff \tau + V(x(0)) \geq V(x(t))$ \\
 Differentielle Dissipativitätsungleichung: $s(u,y) \geq \dot{V}(x(t))$
 
-\subsubsection*{Passivität}
+\subsubsection{Passivität}
 Dissipativ bzgl spezieller Versorgungsrate $s(u,y) = y^T u$ \\
 $V(x)$ ist psdf \\
 Integrale Passivitätsungleichung: $\int\limits_{0}^{t} y^T u \diff \tau + V(x(0)) \geq V(x(t))$ \\
@@ -547,21 +485,23 @@ Differentielle Passivitätsungleichung: $s(u,y) \geq \dot{V}(x(t))$ \\
   streng passiv: &  $\Rightarrow$ bei '$>$' & bzw $g(t) > 0$ \\
   verlustlos:    &  $\Rightarrow$ bei '=' & bzw $g(t) = 0$
 \end{tabular}
+\end{sectionbox}
 
+\begin{sectionbox}
 \subsection{Passivität und Stabilitätseigenschaften}
 
-\subsubsection*{Passivität und Lyapunov-Stabilität}
+\subsubsection{Passivität und Lyapunov-Stabilität}
 \begin{itemize}
   \item System ist passiv
   \item $V$ ist stetig diff'bar und psd
 \end{itemize}
 $\Rightarrow$ Ruhelage $x=0$ ist stabil iSvL
 
-\subsubsection*{Null-Zustandsbeobachtbarkeit}
+\subsubsection{Null-Zustandsbeobachtbarkeit}
 Nur $x^*=0$ kann in $\mathcal{S} = \left\{ x \in \mathbb{R} | h(x,0)=0 \right\}$ bleiben
 
-\subsubsection*{Passivität und asymptotische Stabilität}
-$x^*=0$ ist asymptotisch stabil wenn eine der beiden Punkte zutrifft: \\
+\subsubsection{Passivität und asymptotische Stabilität}
+$x^*=0$ ist asymptotisch stabil wenn eine der beiden Punkte zutrifft:
 \begin{itemize}
   \item System ist streng passiv
   \item über $V(x)$:
@@ -574,9 +514,10 @@ $x^*=0$ ist asymptotisch stabil wenn eine der beiden Punkte zutrifft: \\
 \end{itemize}
 
 Wenn $V(x)$ zusätzlich radial unbeschränkt ist $\Rightarrow x^* = 0$ ist global asymptotisch stabil
-
+\end{sectionbox}
 
 \section{Passivitätsbasierte Regelung}
+\begin{sectionbox}
 $x^* = 0$ ist global asymptotisch stabil\\
 $\Rightarrow$ System kann stabilisiert werden mit $u = -\Phi(y)$, wobei:
 \begin{itemize}
@@ -591,25 +532,23 @@ mögliche $\Phi$:  & $\Phi = k_i \text{sat}(y_i)$ & \\
                   & $\Phi = \frac{2 k_i}{\pi}\text{atan}(y_i)$ &
 \end{tabular}
 
-\subsubsection*{Feedback-Passivierung}
+\subsubsection{Feedback-Passivierung}
 Ziel: Nicht-Passive Systeme in passive transformieren durch spezielle Wahl der Ausgangsfunktion $y=h(x)$ \\
 $\dot{x} = f(x) + G(x)u$ \\
 $\Rightarrow$ Ausgang $y = h(x) \overset{\text{def}}{=} \left[ \frac{\partial V}{\partial x} G \right]^T$ \\
 Ist Ausgang dann Null-Zustandsbeobachtbar $\Rightarrow$ es kann global stabilisierendes Regelgesetz gefunden werden
-
+\end{sectionbox}
 
 \section{Feedback-Linearisierung}
-Nichtlineare System-Transformation: $z = \varphi (x)$
-
-\subsection{Vorgehen}
-\begin{enumerate}
+\begin{sectionbox}
+\begin{cookbox}{Nichtlineare System-Transformation: $z = \varphi (x)$}
   \item Zustandstransformation: $z = \varphi(x)$
   \item NL-RNF aufstellen
   \item Überprüfen ob $\varphi(x)$ ein Diffeomorphismus ist
   \item Feedback-linearisierendes Regelgesetz aufstellen
-\end{enumerate}
+\end{cookbox}
 
-\subsubsection*{Nichtlineare Regelungsnormalform, NL-RNF}
+\subsubsection{Nichtlineare Regelungsnormalform, NL-RNF}
 \begin{align*}
   \dot{z}_1 &= z_2 \\
   \dot{z}_2 &= z_3 \\
@@ -617,29 +556,28 @@ Nichtlineare System-Transformation: $z = \varphi (x)$
   \dot{z}_n &= a(x) + b(x) u \\
 \end{align*}
 
-\subsubsection*{Diffeomorphismus}
+\subsubsection{Diffeomorphismus}
 $z = \varphi(x)$ ist (lokal) gültige Zustandstransformation wenn $\nabla \underline{\varphi}$ nicht singulär ist, $\Leftrightarrow \det(\nabla \varphi) \neq 0$ \\
 $\nabla \underline{\varphi} = \left[ \frac{\partial \varphi_i}{\partial x_j} \right]$, Jacobi-Matrix
 
-\subsubsection*{Feedback-linearisierendes Regelgesetz}
+\subsubsection{Feedback-linearisierendes Regelgesetz}
 $u(x) = \frac{1}{b(x)}[v - a(x)]$ \\
 $\Rightarrow \dot{z}_n = v $
-
+\end{sectionbox}
 
 \section{E/A-Linearisierung}
-
-\subsubsection*{Vorgehen}
-\begin{enumerate}
+\begin{sectionbox}
+\begin{cookbox}{Vorgehen}
   \item Ausgang $y$ festlegen, dessen dynamische Antwort auf Reglereingang $v$ linearisiert werden soll
   \item Zeitliche Ableitung des Ausgangs $y$ liefert nach einigen Schritten  die E/A-Beziehung in RNF
   \item Aus RNF das feedback-linearisierende Regelgesetz aufstellen
   \item Bei Bedarf Systemtransformation durchführen, so dass $\dot{z}_n = v$
-\end{enumerate}
+\end{cookbox}
 
 $\dot{x} = f(x) + g(x)u$ \\
 $\Rightarrow \dot{y}(x) = \frac{\partial h}{\partial x}f(x) + \frac{\partial h}{\partial x}g(x)u = L_f h(x) + L_g h(x) u$ \\
 
-\subsubsection*{zu 2.}
+\subsubsection{zu 2.}
 $y$ so lange ableiten bis: $\overset{(r)}{y} = a(x) + b(x) u$ \\
 \begin{align*}
   \dot{y}           &= L_f h                            &(\text{mit} L_g h(x) = 0) \\
@@ -648,28 +586,29 @@ $y$ so lange ableiten bis: $\overset{(r)}{y} = a(x) + b(x) u$ \\
   \overset{(r)}{y}  &= L_f^r h + L_g L_f^{r-1} h(x) u   &
 \end{align*}
 
-\subsubsection*{zu 3.}
+\subsubsection{zu 3.}
 $u(x) \overset{!}{=} \frac{1}{b(x)} [v - a(x)]$ \\
 Neuer virtueller Systemeingang: $v = \overset{r}{y}$ \\
 Regelgesetz: $u(x) = \frac{v - L_f^r h(x)}{L_g L_f^{r-1} h(x)}$
 
-\subsubsection*{Relativer Grad bzw Differenzengrad}
-Vollstandige Linearisierung: $r = n$ \\
-interne Dynamik vorhanden: $r < n$ \\
-Nulldynamik: $y(t) = 0, \forall t$, mit interner Dynamik
+\subsubsection{Relativer Grad bzw Differenzengrad}
+\begin{tablebox}{ll}
+Vollstandige Linearisierung & $r = n$ \\
+interne Dynamik vorhanden & $r < n$ \\
+Nulldynamik & $y(t) = 0, \forall t$, mit interner Dynamik
+\end{tablebox}
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Zustands-Linearisierung}
 $\dot{x} = f(x) + g(x)u$ \\
 $\dot{z} = \nabla \varphi(x) \left( f(x) + g(x)u \right)$
-
-\subsubsection*{Vorgehen}
-\begin{enumerate}
+\begin{cookbox}{Vorgehen}
   \item Nichtlineare Zustandstransformation bestimmen $\Rightarrow \varphi(x)$
   \item Regelgesetz bestimmtn
-\end{enumerate}
+\end{cookbox}
 
-\subsubsection*{zu 1.}
+\subsubsection{zu 1.}
 GLS lösen: \\
 \begin{align*}
   \underbrace{
@@ -702,7 +641,7 @@ $ L_g L_f^i \varphi_1(x) =
 \end{cases}$
 
 ist gleichbedeutend mit: \\
-$\left[ \frac{\partial \varphi_1(x)}{\partial x} \right] \text{ad}_f^i g(x) = 
+$\left[ \frac{\partial \varphi_1(x)}{\partial x} \right] \text{ad}_f^i g(x) =
 \begin{cases}
   0, & i = 0, \dots, n-2 \\
   \hat{g}(x), & i = n-1
@@ -715,23 +654,20 @@ $g* = (-1)^{n-1} \hat{g}^*$\\
 Dann nach $\frac{\partial \varphi_1}{\partial x}$ auflösen und daraus $\varphi_1$ bestimmen. \\
 Für die restlichen $\varphi_i$ gilt: $\varphi_i(x) = L_f^i \varphi_1$
 
-\subsubsection*{zu 2.}
+\subsubsection{zu 2.}
 Regelgesetz: $u(x) = \frac{1}{L_g L_f^{n-1} \varphi_1(x)} \left( v - L_f^n \varphi_1(x) \right)$\\
 wobei $v$: neuer Regeleingang
-
-
+\end{sectionbox}
 
 \section{Flachheitsbasierte Regelung}
-
-\subsubsection*{Vorgehen}
-\begin{enumerate}
+\begin{sectionbox}
+\begin{cookbox}{Vorgehen}
   \item Flachheitsanalyse
   \item Flachheitsbasierte Steuerung
   \item Flachheitsbasierte Folgeregelung
-\end{enumerate}
+\end{cookbox}
 
-\subsubsection*{zu 1. Flachheitsanalyse}
-
+\subsubsection{zu 1. Flachheitsanalyse}
 System ist flach wenn folgende Bedingungen erfüllt sind:
 \begin{itemize}
   \item es gibt (fiktiven) Ausgang $y = \Phi(x, u, \dot{u}, \dots, \os{(\alpha)}{u})$ \\
@@ -742,37 +678,33 @@ System ist flach wenn folgende Bedingungen erfüllt sind:
     $u = \Psi_2 (y, \dot{y}, \dots, \os{(\gamma +1)}{y})$
 \end{itemize}
 
-\subsubsection*{Flachen Ausgang bestimmen}
-\begin{itemize}
+\begin{cookbox}{Flachen Ausgang bestimmen}
   \item Ausgang sollte möglichst viel Information über das dynamische Systemverhalten haben
   \item Sukzessive zeitliche Ableitung des Kandidaten zur Herleitung von Gleichungen zur Bestimmung von $x$ und $u$
   \item $y$ muss so oft abgeleitet werden, bis aus dem resultierenden GLS von $y,\dots,\os{\gamma}{y}$ alle unbekannten $x$ und $u$ (lokal) bestimmt werden können
   \item Kandidat ist umso erfolgversprechender, je häufiger abgeleitet werden kann ohne dass Eingänge $u$ auftauchen
-\end{itemize}
+\end{cookbox}
 
 Danach $x = \Psi_1 (y, \dot{y}, \dots, \os{(\gamma)}{y})$ und $u = \Psi_2 (y, \dot{y}, \dots, \os{(\gamma +1)}{y})$ bestimmen
 
-\subsubsection*{zu 2. Flachheitsbasierte Steuerung}
-
-Solltrajektorie bestimmen:
-\begin{enumerate}
+\subsubsection{zu 2. Flachheitsbasierte Steuerung}
+\begin{cookbox}{Solltrajektorie bestimmen}
   \item $y_d$ bestimmen: entweder vorgegeben oder\\
     falls $y_d$ nicht vorgegeben, dann aus $x_d$ oder Regelgröße $w$ bestimmen
   \item zugehörige $x_d$ und $u_d$ bestimmen
-\end{enumerate}
+\end{cookbox}
 
-\subsubsection*{zu 3. Flachheitsbasierte Folgeregelung}
-Zustandsrückführung und Nichtlineares Regelgesetz aufstellen
-\begin{enumerate}
+\subsubsection{zu 3. Flachheitsbasierte Folgeregelung}
+\begin{cookbox}{Zustandsrückführung und Nichtlineares Regelgesetz aufstellen}
   \item fiktive (differentierte) Ausgänge $\left[ y, \dots, \os{(\alpha)}{y} \right]$ als Eingänge $v$ einführen
   \item Nichtlineares Regelgesetz aufstellen: $u = \Psi\left( y, \dots, \os{(\alpha)}{y}, v \right)$
   \item Zustandstransformation: $z = \dots$
   \item Zustands-DGL: $\dot{z} = \dots$
-\end{enumerate}
-
+\end{cookbox}
+\end{sectionbox}
 
 \section{Backstepping}
-
+\begin{sectionbox}
 \subsection{Anwendungsgebiet}
 $u \rightarrow \dot{x}_n \rightarrow \int \dots \rightarrow \dot{x}_i \rightarrow \int \rightarrow \dot{x}_1 \rightarrow \int \rightarrow x_1$
 
@@ -784,13 +716,13 @@ $u \rightarrow \dot{x}_n \rightarrow \int \dots \rightarrow \dot{x}_i \rightarro
             &\vdots & \\
   \dot{x}_n &=      & f_n(x_1, \dots, x_n) + g_n(x_1, \dots, x_n)u
 \end{align*}
+\end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Verfahren (rekursiv anwenden)}
+System wird in Teilsysteme unterteilt. Ausgang des einen Teilsystems ist Pseude-Stellgröße des nachfolgenen Systems.
 
-System wird in Teilsysteme unterteil. Ausgang des einen Teilsystems ist Pseude-Stellgröße des nachfolgenen Systems.
-
-\begin{enumerate}
+\begin{cookbox}{Vorgehen}
   \item Transformiertes Teilsystem aufstellen\\
     $z = \dots$\\
     $\dot{z} = \dots$
@@ -805,12 +737,11 @@ System wird in Teilsysteme unterteil. Ausgang des einen Teilsystems ist Pseude-S
     \end{itemize}
   \item Funktion für gewünschte Stellgröße $\alpha_i$ bestimmen: $x_{i+1} := \alpha_i$
   \item So lange rekursiv anwenden bis $\alpha_i = u$
-\end{enumerate}
-
-
+\end{cookbox}
+\end{sectionbox}
 
 \section{Sliding Mode Regelung}
-
+\begin{sectionbox}
 System: $\dot{x} = f(x) + g(x)u + d(t)$ \\
 wobei $d(t)$ unbekannte Störfunktion ist \\
 Schaltmannigfaltigkeit: $S = \left\{ x \in \mathbb{R}^n | s(x) = 0 \right\}$ \\
@@ -833,76 +764,39 @@ Gezielte Unterdrückung von Störung ist möglich wenn:
   \item $|d_i| < D_i, D_i = const \in \mathbb{R}$
 \end{itemize}
 
-\subsubsection*{Vorgehen}
-\begin{enumerate}
-  \item Diskontinuierliche Reglerfunktion finden, so dass System in endlicher Zeit in den Sliding Mode geht
-  \item Schaltmannigfaltigkeit so wählen, dass im Sliding Mode gewünschte Systemdynamik auftritt
-\end{enumerate}
+\begin{cookbox}{Vorgehen}
+  \item Diskontinuierliche Reglerfunktion finden, so dass System in endlicher Zeit in den Sliding Mode geht\\
+  Um in den Sliding Mode zu kommen muss gelten:
+  \begin{itemize}
+    \item $s_i \dot{s}_i < 0$
+    \item $\lim\limits_{s_i(x) \rightarrow 0^\pm} \dot{s}_i(x) = k^{\mp} \lessgtr 0$
+  \end{itemize}
+  \item Schaltmannigfaltigkeit so wählen, dass im Sliding Mode gewünschte Systemdynamik auftritt (Beschreibung des Systemverhaltens $\dot{x}$)
+\end{cookbox}
 
-\subsubsection*{zu 1.}
-Um in den Sliding Mode zu kommen muss gelten: 
-\begin{itemize}
-  \item $s_i \dot{s}_i < 0$
-  \item $\lim\limits_{s_i(x) \rightarrow 0^+} \dot{s}_i(x) = k^- < 0$ und $\lim\limits_{s_i(x) \rightarrow 0^-} \dot{s}_i(x) = k^+ > 0$
-\end{itemize}
+\subsubsection{zu 1.}
 
-\subsubsection*{zu 2., Beschreibung des Systemverhaltens $\dot{x}$}
 
-\subsubsection*{Idealer Sliding Mode nach Filippov}
+\subsubsection{Idealer Sliding Mode nach Filippov}
 $\dot{x} = f(x)$\\
 Ansatz: $\dot{x}_\text{fi} = \alpha f^+(x) + (1-\alpha) f^-(x)$ mit $0 \leq \alpha \leq 1$ \\
 Bedingung: $\dot{s}(x_\text{fi}) = \frac{\partial s}{\partial x} \dot{x}_\text{fi} = 0$ \\
 Man erhält: $\alpha = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x))  }$ \\
-und somit:\\ $\dot{x}_\text{fi} = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^+(x) - 
+und somit:\\ $\dot{x}_\text{fi} = \frac{ \frac{\partial s}{\partial x} f^-(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^+(x) -
 \frac{ \frac{\partial s}{\partial x} f^+(x)  }{ \frac{\partial s}{\partial x} (f^-(x) - f^+(x)) } f^-(x)$ \\
 Wobei: $\frac{\partial s}{\partial x}f^- \geq 0$ und $\frac{\partial s}{\partial x}f^+ \leq 0$ \\
 
-\subsubsection*{Idealer Sliding Mode nach der Equivalent Control Method}
+\subsubsection{Idealer Sliding Mode nach der Equivalent Control Method}
 $\dot{x} = f(x) + g(x)u$ \\
 Es gilt: $s(x) = 0, \dot{s}(x) = 0$ \\
 Daraus folgt: $\dot{s}(x) = L_f s(x) + L_g s(x) \tilde{u}_\text{eq}$ \\
 Kontinuierliche Ersatzstellgröße: $\tilde{u}_\text{eq} = -L_g s(x) ^{-1} L_f s(x)$ \\
 Systemdynamik: $\dot{x} = f(x) - g(x) L_g s(x)^{-1} L_f s(x)$
+\end{sectionbox}
 
-
-
-
-
-
-
-
-
-
-
+\begin{sectionbox}
 \subsection{Blockschaltbild}
-%\includegraphics[angle=90]{./img/block.pdf}
 \includegraphics[angle=90, width=5cm]{./img/block.pdf}
+\end{sectionbox}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% Ende des Inhalts
-\end{multicols*}
-% Ende der Spalten
-
-
-% Dokumentende
-% ======================================================================
 \end{document}
